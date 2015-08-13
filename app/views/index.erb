@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>Welcome to Sinatra!</h1>
+  <p>Hello, world!</p>
+
+  <script type="text/javascript">
+    d3.select("body").append("p").text("New paragraph!");
+  </script>
+
+  <button>click me</button>
+
+  <% @comments.each do |comment| %>
+  <%= comment.body %>
+  <% end %>
+</div>
