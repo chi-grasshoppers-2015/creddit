@@ -1,13 +1,13 @@
 
 body {
-  background:  url(http://cdn.backgroundhost.com/backgrounds/subtlepatterns/green_dust_scratch.png);
+  background:  #00E5FF;
   margin: 0;
   padding: 0;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 }
 .container{
-  width: 600px;
+  width: 720px;
   margin: 5em auto;
   padding: 50px;
   background-color: #fff;
@@ -26,17 +26,46 @@ body {
   }
 }
 
+h1 {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  color: darkgrey;
+  font-size:3em;
+}
+
 form {
   text-align: center;
 }
 
+#search-bar {
+  width: 40%;
+  text-align: center;
+  color: grey;
+}
+
 .button {
   border: none;
-  background-color: #C3C63F;
+  background-color: #0CA9E8;
+  color: white;
+  margin-top: 3%;
+  width: 20%;
+}
+
+.button:hover {
+  border: none;
+  background-color: #0087FF;
+  color: white;
+  margin-top: 3%;
+  width: 20%;
 }
 
 .bar {
   fill: steelblue;
+}
+
+.chart {
+
 }
 
 .bar-group text {
@@ -45,16 +74,21 @@ form {
 }
 
 .axis text {
-  font: 16px sans-serif;
+  font: 20px sans-serif;
+  fill: darkgrey;
 }
 
 .axis path,
 .axis line {
   fill: none;
-  stroke: #000;
+  stroke: darkgrey;
   shape-rendering: crispEdges;
 }
 
 .x.axis path {
   display: none;
+}
+
+.bar2 {
+  fill: #0CA9E8;
 }

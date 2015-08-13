@@ -25,8 +25,8 @@ $(document).ready(function() {
 
 function drawAvgScoreBarChart(jsonWords) {
   var margin = {top: 20, right: 30, bottom: 30, left: 40},
-      width = 960 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
+      width = 700 - margin.left - margin.right,
+      height = 300 - margin.top - margin.bottom;
 
   var x = d3.scale.ordinal()
       .rangeRoundBands([0, width], .1);
@@ -89,8 +89,8 @@ function drawAvgScoreBarChart(jsonWords) {
 
 function drawFrequencyBarChart(jsonWords) {
   var margin = {top: 20, right: 30, bottom: 30, left: 40},
-      width = 960 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
+      width = 700 - margin.left - margin.right,
+      height = 300 - margin.top - margin.bottom;
 
   var x = d3.scale.ordinal()
       .rangeRoundBands([0, width], .1);
@@ -137,7 +137,7 @@ function drawFrequencyBarChart(jsonWords) {
             .attr("class", "bar-group")
 
   bar.append("rect")
-     .attr("class", "bar")
+     .attr("class", "bar2")
      .attr("x", function(d) { return x(d.word); })
      .attr("y", function(d) { return y(d.frequency); })
      .attr("height", function(d) { return height - y(d.frequency); })
