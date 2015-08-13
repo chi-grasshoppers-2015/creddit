@@ -35,3 +35,27 @@ form {
 body {
   background-color: #F2B441;
 }
+
+.bar {
+  fill: steelblue;
+}
+
+.bar-group text {
+  fill: white;
+  font: 12px sans-serif;
+}
+
+.axis text {
+  font: 16px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}

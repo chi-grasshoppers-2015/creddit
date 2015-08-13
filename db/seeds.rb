@@ -5,7 +5,7 @@ require 'uri'
 all_uri = URI.parse("http://www.reddit.com/r/all.json")
 
 comments_json = []
-10.times do
+20.times do
   response = Net::HTTP::get_response(all_uri)
   posts = JSON.parse(response.body)
   post_ids = posts["data"]["children"].map { |p| p["data"]["id"] }
@@ -16,7 +16,7 @@ comments_json = []
       comments = JSON.parse(response.body)
     rescue
       p "ERROR. ERROR. WE KILLED REDDIT."
-      sleep(10)
+      sleep(60)
       response = Net::HTTP::get_response(post_uri)
     end
     comments[1]["data"]["children"].each do |comment|
@@ -47,7 +47,7 @@ end
 
 def build_comment_hash(comment)
   return {
-    body: comment["body"],
+    body: comment["body"].downcase,
     author: comment["author"],
     subreddit: comment["subreddit"],
     score: comment["score"],
