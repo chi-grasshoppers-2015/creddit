@@ -7,22 +7,29 @@
 form {
 
   margin-left: 43% ;
+  border: 20px solid #D97762;
+
+
 }
 
 
 
 #search-bar {
   height: 33px;
-  width: 20%;
+  width: 40%;
   margin-top: 50%;
+  text-align: center;
 }
 
 .button {
-  margin-left: 7%;
+  margin-left: 10%;
   background-color: #0093A7;
   border: none;
   margin-top: 5%;
   height: 40px;
+  width: 20%;
+  color: white;
+  border-radius: 7px;
 }
 
 body {
