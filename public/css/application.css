@@ -7,11 +7,13 @@ body {
 
 }
 .container{
-  width: 720px;
+  width: 750px;
   margin: 5em auto;
   padding: 50px;
   background-color: #fff;
   border-radius: 1em;
+  padding: 2%;
+  border: 2px solid lightblue;
 }
 
 @media (max-width: 700px) {
@@ -27,11 +29,18 @@ body {
 }
 
 h1 {
+  /*display: inline-block;*/
+  padding: none;
   text-align: center;
   padding: 0;
   margin: 0;
   color: darkgrey;
   font-size:3em;
+}
+
+h2 {
+  color: white;
+  margin-left: 10%;
 }
 
 form {
@@ -42,6 +51,15 @@ form {
   width: 40%;
   text-align: center;
   color: grey;
+  border: none;
+  border-bottom: 1px solid darkgrey;
+}
+
+#search-bar:focus {
+  width: 40%;
+  text-align: center;
+  outline: none;
+  box-shadow: none;
 }
 
 .button {
@@ -58,6 +76,16 @@ form {
   color: white;
   margin-top: 3%;
   width: 20%;
+}
+
+.button:focus {
+  border: none;
+  background-color: #0087FF;
+  color: white;
+  margin-top: 3%;
+  width: 20%;
+  outline: none;
+  box-shadow: none;
 }
 
 .bar {
