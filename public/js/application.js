@@ -102,6 +102,14 @@ function drawFrequencyBarChart(jsonWords) {
       .attr("width", width)
       .attr("height", height);
 
+  var tip = d3.tip()
+      .attr('class', 'd3-tip')
+      .offset([120, 40])
+      .html(function(d) {
+          return "<strong>" + d.frequency +
+                    " times</strong><br>" ;
+      });
+
   var xAxis = d3.svg.axis()
     .scale(x)
     .orient("bottom");
@@ -130,6 +138,8 @@ function drawFrequencyBarChart(jsonWords) {
 
   var barWidth = width / jsonWords.length;
 
+  chart.call(tip);
+
   var bar = chart.selectAll(".bar-group")
             .data(jsonWords)
             .enter()
@@ -148,4 +158,7 @@ function drawFrequencyBarChart(jsonWords) {
      .attr("y", function(d) { return y(d.frequency) + 5; })
      .attr("dy", ".75em")
      .text(function(d) { return d.frequency; });
+
+  bar.on("mouseover", tip.show)
+     .on("mouseout", tip.hide);
 }
