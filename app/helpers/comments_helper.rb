@@ -1,12 +1,16 @@
 helpers do
 
-  def summarize_values(array)
+  def summarize_values(array, word)
+    array.uniq.map { |val| [word, val, array.count(val)] }
+  end
+
+  def generate_hours_posted_data(array, word)
     unique_values = array.uniq
-    summary = {}
+    summary = []
     unique_values.each do |val|
-      summary[val] = array.count(val)
+      summary << { word: word, hour: array.count(val) }
     end
-    return unique_values
+    return summary
   end
 
 end

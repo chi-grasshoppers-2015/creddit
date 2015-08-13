@@ -15,6 +15,7 @@ post '/data' do
   content_type :json
   @words = params[:search].split(" ")
   array = []
+  # time_summary_data = []
   @words.each do |word|
     hash = {}
     @comments = Comment.frequencies(word)
@@ -22,9 +23,11 @@ post '/data' do
     hash[:frequency] = @comments.count
     hash[:avgpoints] = Comment.avgpoints(@comments)
     hours_posted_array = @comments.map { |comment| comment.hour_posted }
-    hash[:hours_posted_data] = summarize_values(hours_posted_array)
+    hash[:hours_posted_data] = summarize_values(hours_posted_array, word)
+    # time_summary_data.concat(generate_hours_posted_data(hours_posted_array, word))
     array << hash
   end
+  # array << time_summary_data
   array.to_json
 end
 

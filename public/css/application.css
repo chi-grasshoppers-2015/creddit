@@ -49,6 +49,6 @@ body {
   shape-rendering: crispEdges;
 }
 
-.x.axis path {
-  display: none;
+.legend text {
+  font-weight: bold;
 }
