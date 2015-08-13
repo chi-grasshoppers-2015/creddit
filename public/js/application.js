@@ -1,6 +1,15 @@
+
 $(document).ready(function() {
+  $(".arrow").velocity({
+  translateY: "6px"
+}, {
+  loop: true
+}).velocity("reverse");
+
+
   $("form").on("submit", function(e){
     e.preventDefault();
+
 
     var request = $.ajax ({
       method: "POST",
@@ -9,6 +18,10 @@ $(document).ready(function() {
     })
     request.done(function(response){
       console.log(response);
+      $(".arrow").hide();
+      $("h4").toggle();
+      $("#hide").toggle();
+      $(".chart").show();
       drawFrequencyBarChart(response);
       drawAvgScoreBarChart(response);
       // Iterate through the json object that has been processed in ruby already, for each AR comment object

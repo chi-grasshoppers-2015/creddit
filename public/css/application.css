@@ -11,9 +11,11 @@ body {
   margin: 5em auto;
   padding: 50px;
   background-color: #fff;
-  border-radius: 1em;
+  border-radius: 1.1em;
   padding: 2%;
-  border: 2px solid lightblue;
+  margin-top: 6%;
+  margin-bottom: 6%;
+
 }
 
 @media (max-width: 700px) {
@@ -35,18 +37,28 @@ h1 {
   padding: 0;
   margin: 0;
   color: darkgrey;
-  font-size:3em;
+  font-size:2em;
+}
+
+h4 {
+  display: none;
+  color: darkgrey;
 }
 
 h2 {
   color: white;
-  margin-left: 10%;
+  margin: 0 0 0 10%;
+  /*margin-left: 10%;*/
+  font-size: 3em;
+  padding: none;a
 }
 
 form {
   text-align: center;
 }
-
+#search {
+  margin-top: 17%;
+}
 #search-bar {
   width: 40%;
   text-align: center;
@@ -68,6 +80,7 @@ form {
   color: white;
   margin-top: 3%;
   width: 20%;
+  border-radius: 1.1em;
 }
 
 .button:hover {
@@ -120,3 +133,44 @@ form {
 .bar2 {
   fill: #0CA9E8;
 }
+
+.line {
+  width: auto;
+  height: 10px;
+  margin-top: 20px;
+  background-color: white;
+  padding: none;
+}
+
+.line2 {
+  width: auto;
+  height: 5px;
+  margin-top: 20px;
+  background-color: white;
+  padding: none;
+
+}
+.line3 {
+  width: auto;
+  height: 5px;
+  margin-top: 20px;
+  background-color:#0087FF;
+  opacity: .7;
+}
+
+#hide {
+  display: none;
+}
+
+#arrow{
+  margin-left: 50%;
+  padding-top: 2%;
+  color: darkgrey;
+}
+
+.chart {
+  display: none;
+}
+
+
+
