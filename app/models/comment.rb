@@ -9,4 +9,8 @@ class Comment < ActiveRecord::Base
     # array_containing_comments.map(&:score).inject(:+) / array_containing_comments.count
   end
 
+  def hour_posted
+    self.creation_date.hour
+  end
+
 end

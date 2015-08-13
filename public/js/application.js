@@ -6,14 +6,14 @@ $(document).ready(function() {
       method: "POST",
       url: "/data",
       data: $(this).serialize()
-    })
+    });
     request.done(function(response){
       console.log(response);
       drawFrequencyBarChart(response);
       drawAvgScoreBarChart(response);
       // Iterate through the json object that has been processed in ruby already, for each AR comment object
       // response.each()
-    })
+    });
 
   })
   // This is called after the document has loaded in its entirety
@@ -22,6 +22,10 @@ $(document).ready(function() {
 
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
 });
+
+function drawHoursPostedPlot(jsonWords) {
+
+}
 
 function drawAvgScoreBarChart(jsonWords) {
   var margin = {top: 20, right: 30, bottom: 30, left: 40},

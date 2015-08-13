@@ -21,6 +21,8 @@ post '/data' do
     hash[:word] = word
     hash[:frequency] = @comments.count
     hash[:avgpoints] = Comment.avgpoints(@comments)
+    hours_posted_array = @comments.map { |comment| comment.hour_posted }
+    hash[:hours_posted_data] = summarize_values(hours_posted_array)
     array << hash
   end
   array.to_json
