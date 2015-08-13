@@ -1,14 +1,19 @@
 <div class="container">
-  <h1>Welcome to Sinatra!</h1>
-  <p>Hello, world!</p>
-
-  <script type="text/javascript">
-    d3.select("body").append("p").text("New paragraph!");
-  </script>
-
-  <button>click me</button>
-
-  <% @comments.each do |comment| %>
-  <%= comment.body %>
-  <% end %>
+  <div id="search">
+    <form>
+      <input id="search-bar" type="search" name="search" value="What are you looking for?"><br>
+      <input type="submit" value="Search" class="button">
+    </form>
+  </div>
 </div>
+
+
+
+
+<!-- <form class="form">
+  <label for="search">Search</label>
+  <input id="search" type="search" placeholder="Search" name="search">
+  <button type="submit" id="search" class="pure-button pure-button-primary">Search</button>
+</form> -->
+
+
