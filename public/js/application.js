@@ -1,9 +1,14 @@
 $(document).ready(function() {
-  $("button").on("click", function(e){
+  $("form").on("submit", function(e){
     e.preventDefault();
 
-    var request = $.post("/")
+    var request = $.ajax ({
+      method: "POST",
+      url: "/data",
+      data: $(this).serialize()
+    })
     request.done(function(response){
+      console.log(response);
       // Iterate through the json object that has been processed in ruby already, for each AR comment object
       // response.each()
     })
