@@ -23,7 +23,7 @@ $(document).ready(function() {
       console.log(response);
       $(".loader").hide();
       $("h4").show();
-      $("#hide").show();
+      $(".divider").show();
       $(".chart").show();
       $("form").trigger('reset');
       drawFrequencyBarChart(response);
@@ -46,6 +46,9 @@ function clearSearchResults() {
   $('.chart').hide();
 }
 
+GRAPH_HEIGHT = 300
+GRAPH_WIDTH = 750
+
 function drawHoursPostedPlot(jsonWords) {
 
   var wordList = jsonWords.map(function(wordObj) {
@@ -63,8 +66,8 @@ function drawHoursPostedPlot(jsonWords) {
   console.log(timeDataFlattened);
 
   var margin = {top: 20, right: 30, bottom: 30, left: 40},
-      width = 700 - margin.left - margin.right,
-      height = 300 - margin.top - margin.bottom;
+      width = GRAPH_WIDTH - margin.left - margin.right,
+      height = GRAPH_HEIGHT - margin.top - margin.bottom;
 
   var xScale = d3.scale.ordinal()
       .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
@@ -98,7 +101,7 @@ function drawHoursPostedPlot(jsonWords) {
 
   var legend = chart.append("g")
               .attr("class", "legend")
-              .attr("transform", "translate(" + (width - 40) + ",0)");
+              .attr("transform", "translate(" + (width - 80) + ",0)");
 
   for (var i=0; i < wordList.length; i++) {
     legend.append("text")
@@ -131,8 +134,8 @@ function drawHoursPostedPlot(jsonWords) {
 
 function drawAvgScoreBarChart(jsonWords) {
   var margin = {top: 20, right: 30, bottom: 30, left: 40},
-      width = 700 - margin.left - margin.right,
-      height = 300 - margin.top - margin.bottom;
+      width = GRAPH_WIDTH - margin.left - margin.right,
+      height = GRAPH_HEIGHT - margin.top - margin.bottom;
 
   var x = d3.scale.ordinal()
       .rangeRoundBands([0, width], .1);
@@ -195,8 +198,8 @@ function drawAvgScoreBarChart(jsonWords) {
 
 function drawFrequencyBarChart(jsonWords) {
   var margin = {top: 20, right: 30, bottom: 30, left: 40},
-      width = 700 - margin.left - margin.right,
-      height = 300 - margin.top - margin.bottom;
+      width = GRAPH_WIDTH - margin.left - margin.right,
+      height = GRAPH_HEIGHT - margin.top - margin.bottom;
 
   var x = d3.scale.ordinal()
       .rangeRoundBands([0, width], .1);
