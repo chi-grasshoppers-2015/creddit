@@ -1,36 +1,112 @@
-.container {
-  margin: 0 7%;
-  border: 1px solid green;
-  height: auto;
+
+body {
+  background:  #00E5FF;
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+.container{
+  width: 750px;
+  margin: 5em auto;
+  padding: 50px;
+  background-color: #fff;
+  border-radius: 1.1em;
+  padding: 2%;
+  margin-top: 6%;
+  margin-bottom: 6%;
+
+}
+
+@media (max-width: 700px) {
+  body {
+    background-color: #fff;
+  }
+  div {
+    width: auto;
+    margin: 0 auto;
+    border-radius: 0;
+    padding: 1em;
+  }
+}
+
+h1 {
+  /*display: inline-block;*/
+  padding: none;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  color: darkgrey;
+  font-size:2em;
+}
+
+h4 {
+  display: none;
+  color: darkgrey;
+}
+
+h2 {
+  color: white;
+  margin: 0 0 0 10%;
+  /*margin-left: 10%;*/
+  font-size: 3em;
+  padding: none;a
 }
 
 form {
-
-  margin-left: 43% ;
+  text-align: center;
+}
+#search {
+  margin-top: 17%;
+}
+#search-bar {
+  width: 40%;
+  text-align: center;
+  color: grey;
+  border: none;
+  border-bottom: 1px solid darkgrey;
 }
 
-
-
-#search-bar {
-  height: 33px;
-  width: 20%;
-  margin-top: 50%;
+#search-bar:focus {
+  width: 40%;
+  text-align: center;
+  outline: none;
+  box-shadow: none;
 }
 
 .button {
-  margin-left: 7%;
-  background-color: #0093A7;
   border: none;
-  margin-top: 5%;
-  height: 40px;
+  background-color: #0CA9E8;
+  color: white;
+  margin-top: 3%;
+  width: 20%;
+  border-radius: 1.1em;
 }
 
-body {
-  background-color: #F2B441;
+.button:hover {
+  border: none;
+  background-color: #0087FF;
+  color: white;
+  margin-top: 3%;
+  width: 20%;
+}
+
+.button:focus {
+  border: none;
+  background-color: #0087FF;
+  color: white;
+  margin-top: 3%;
+  width: 20%;
+  outline: none;
+  box-shadow: none;
 }
 
 .bar {
   fill: steelblue;
+}
+
+.chart {
+
 }
 
 .bar-group text {
@@ -39,16 +115,62 @@ body {
 }
 
 .axis text {
-  font: 16px sans-serif;
+  font: 20px sans-serif;
+  fill: darkgrey;
 }
 
 .axis path,
 .axis line {
   fill: none;
-  stroke: #000;
+  stroke: darkgrey;
   shape-rendering: crispEdges;
 }
 
 .x.axis path {
   display: none;
 }
+
+.bar2 {
+  fill: #0CA9E8;
+}
+
+.line {
+  width: auto;
+  height: 10px;
+  margin-top: 20px;
+  background-color: white;
+  padding: none;
+}
+
+.line2 {
+  width: auto;
+  height: 5px;
+  margin-top: 20px;
+  background-color: white;
+  padding: none;
+
+}
+.line3 {
+  width: auto;
+  height: 5px;
+  margin-top: 20px;
+  background-color:#0087FF;
+  opacity: .7;
+}
+
+#hide {
+  display: none;
+}
+
+#arrow{
+  margin-left: 50%;
+  padding-top: 2%;
+  color: darkgrey;
+}
+
+.chart {
+  display: none;
+}
+
+
+
