@@ -139,13 +139,20 @@ function drawScoreDistributionPlot(jsonWords) {
 
   var plot = chart.selectAll(".plot-point")
             .data(scoreDataFlattened)
-            .enter()
-            .append("circle")
-            .attr("class", "plot-point")
-            .attr("cx", function(d) { return xScale(d[1]); })
-            .attr("cy", function(d) { return yScale(d[2]); })
-            .attr("r", "5")
-            .attr("fill", function(d) { return colorScale(d[0]); });
+            .enter();
+
+  var points = plot.append("circle")
+                  .attr("class", "plot-point")
+                  .attr("r", "5")
+                  .attr("cx", 0)
+                  .attr("cy", 0)
+                  .attr("fill", function(d) { return colorScale(d[0]); });
+
+  points.transition()
+        .duration(500)
+        .ease("elastic-in")
+        .attr("cx", function(d) { return xScale(d[1]); })
+        .attr("cy", function(d) { return yScale(d[2]); });
 }
 
 function drawHoursPostedPlot(jsonWords) {
@@ -220,13 +227,21 @@ function drawHoursPostedPlot(jsonWords) {
 
   var plot = chart.selectAll(".plot-point")
             .data(timeDataFlattened)
-            .enter()
-            .append("circle")
-            .attr("class", "plot-point")
-            .attr("cx", function(d) { return xScale(d[1]); })
-            .attr("cy", function(d) { return yScale(d[2]); })
-            .attr("r", "5")
-            .attr("fill", function(d) { return colorScale(d[0]); });
+            .enter();
+
+  var points = plot.append("circle")
+                  .attr("class", "plot-point")
+                  .attr("r", "5")
+                  .attr("cx", 0)
+                  .attr("cy", 0)
+                  .attr("fill", function(d) { return colorScale(d[0]); });
+
+  points.transition()
+        .duration(500)
+        .ease("elastic-in")
+        .attr("cx", function(d) { return xScale(d[1]); })
+        .attr("cy", function(d) { return yScale(d[2]); });
+
 }
 
 function drawAvgScoreBarChart(jsonWords) {
