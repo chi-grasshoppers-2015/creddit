@@ -20,7 +20,8 @@ $(document).ready(function() {
       $(".tabs").show();
       $(".chart").show();
       $(".average-score").hide();
-      $(".hours-posted").hide()
+      $(".hours-posted").hide();
+      $(".score-distribution").hide();
       $(".loader").hide();
       $("h4").show();
       $(".tabs").on('click','a', function(event){
