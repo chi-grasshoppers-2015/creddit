@@ -13,7 +13,7 @@ body {
   background-color: #fff;
   border-radius: 1.1em;
   padding: 2%;
-  margin-top: 6%;
+
   margin-bottom: 6%;
 
 }
@@ -45,19 +45,13 @@ h4 {
   color: darkgrey;
 }
 
-h2 {
-  color: white;
-  margin: 0 0 0 10%;
-  /*margin-left: 10%;*/
-  font-size: 3em;
-  padding: none;a
-}
+
 
 form {
   text-align: center;
 }
 #search {
-  margin-top: 17%;
+  margin-top: 7%;
 }
 #search-bar {
   width: 40%;
@@ -288,6 +282,14 @@ form {
     color: darkgrey;
     text-decoration: none;
     border-bottom: none;
+}
+
+#logo {
+  height: 125px;
+  width: 300px;
+  margin-left: 41%;
+  margin-top: 5%;
+
 }
 
 
