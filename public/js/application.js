@@ -1,5 +1,6 @@
 
 $(document).ready(function() {
+  $(".tabs").hide();
   $(".loader").hide();
   $(".arrow").velocity({
   translateY: "6px"
@@ -21,10 +22,23 @@ $(document).ready(function() {
     });
     request.done(function(response){
       console.log(response);
+      $(".tabs").show();
+      $(".chart").show();
+      $(".average-score").hide();
+      $(".hours-posted").hide()
       $(".loader").hide();
       $("h4").show();
-      $("#hide").show();
-      $(".chart").show();
+
+      $(".tabs").on('click','a', function(event){
+        event.preventDefault();
+        $(".tab").hide();
+        $(".chart div").hide();
+        var a_href = $(event.target).attr('href');
+        $(a_href).show();
+        $('li').removeClass("active");
+        $(event.target).parent().addClass("active");
+    });
+
       $("form").trigger('reset');
       drawFrequencyBarChart(response);
       drawAvgScoreBarChart(response);

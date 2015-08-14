@@ -5,15 +5,28 @@
 <div id="arrow" class="arrow"><i class="fa fa-arrow-down"></i></div>
 <div class="loader">Loading...</div>
 
-  <div class="chart">
+ <ul class="tabs">
+      <li class="active"><a href=".total-frequency">Total Frequency</a></li>
+      <li><a href=".average-score">Average Score</a></li>
+    <li><a href=".hours-posted">Hours Posted</a></li>
+</ul>
+
+<div class="chart">
+  <div class="total-frequency">
     <h4>Total Frequency</h4>
     <svg class="chart frequency-chart"></svg>
-    <hr id="hide">
+  </div>
+  <hr id="hide">
+  <div class="average-score">
     <h4>Average Score</h4>
     <svg class="chart avg-score-chart"></svg>
-    <h4>Hours Posted</h4>
+  </div>
+  <div class="hours-posted">
+  <h4>Hours Posted</h4>
     <svg class="chart hours-posted-chart"></svg>
+  </div>
 </div>
+
 
   <div id="search">
     <form>
