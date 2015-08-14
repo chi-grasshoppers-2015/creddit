@@ -308,11 +308,23 @@ function drawAvgScoreBarChart(jsonWords) {
       .attr("height", function(d) { return height - y(d.avgpoints); });
 
 
-  bar.append("text")
-     .attr("x", function(d) { return x(d.word) + (barWidth / 2) - (margin.right / 2); })
-     .attr("y", function(d) { return y(d.avgpoints) + 5; })
-     .attr("dy", ".75em")
+  // bar.append("text")
+  //    .attr("x", function(d) { return x(d.word) + (barWidth / 2) - (margin.right / 2); })
+  //    .attr("y", function(d) { return y(d.avgpoints) + 5; })
+  //    .attr("dy", ".75em")
+  //    .text(function(d) { return d.avgpoints; });
+
+
+  var labels = bar.append("text")
+     .attr("x", function(d) { return x(d.word) + (x.rangeBand() / 2) - 5; })
+     .attr("y", height)
+     .attr("dy", "-0.2em")
+     .attr("fill", "black")
      .text(function(d) { return d.avgpoints; });
+
+  labels.transition()
+        .duration(500)
+        .attr("y", function(d) { return y(d.avgpoints) - 5; });
 }
 
 
@@ -380,10 +392,14 @@ function drawFrequencyBarChart(jsonWords) {
       .duration(500)
       .attr("height", function(d) { return height - y(d.frequency); });
 
-  bar.append("text")
-     .attr("x", function(d) { return x(d.word) + (barWidth / 2) - (margin.right / 2); })
-     .attr("y", function(d) { return y(d.frequency) - 5; })
-     .attr("dy", ".75em")
+  var labels = bar.append("text")
+     .attr("x", function(d) { return x(d.word) + (x.rangeBand() / 2) - 5; })
+     .attr("y", height)
+     .attr("dy", "-0.2em")
      .attr("fill", "black")
      .text(function(d) { return d.frequency; });
+
+  labels.transition()
+        .duration(500)
+        .attr("y", function(d) { return y(d.frequency) - 5; });
 }
