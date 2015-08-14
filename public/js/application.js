@@ -15,7 +15,7 @@ $(document).ready(function() {
       method: "POST",
       url: "/data",
       data: $(this).serialize()
-    })
+    });
     request.done(function(response){
       console.log(response);
       $(".arrow").hide();
@@ -24,9 +24,10 @@ $(document).ready(function() {
       $(".chart").show();
       drawFrequencyBarChart(response);
       drawAvgScoreBarChart(response);
+      drawHoursPostedPlot(response);
       // Iterate through the json object that has been processed in ruby already, for each AR comment object
       // response.each()
-    })
+    });
 
   })
   // This is called after the document has loaded in its entirety
@@ -35,6 +36,89 @@ $(document).ready(function() {
 
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
 });
+
+function drawHoursPostedPlot(jsonWords) {
+
+  var wordList = jsonWords.map(function(wordObj) {
+    return wordObj.word;
+  });
+
+  var timeData = jsonWords.map(function(wordObj) {
+    return wordObj.hours_posted_data;
+  });
+
+  var timeDataFlattened = timeData.reduce(function(a, b) {
+    return a.concat(b);
+  });
+
+  console.log(timeDataFlattened);
+
+  var margin = {top: 20, right: 30, bottom: 30, left: 40},
+      width = 700 - margin.left - margin.right,
+      height = 300 - margin.top - margin.bottom;
+
+  var xScale = d3.scale.ordinal()
+      .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+              13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23])
+      .rangePoints([10, width]);
+
+
+  var yScale = d3.scale.linear()
+      .range([(height - 5), 0]);
+
+  var colorScale = d3.scale.category20()
+      .domain(wordList);
+
+  var chart = d3.select(".hours-posted-chart")
+      .attr("width", width)
+      .attr("height", height);
+
+  var xAxis = d3.svg.axis()
+    .scale(xScale)
+    .orient("bottom");
+
+  var yAxis = d3.svg.axis()
+    .scale(yScale)
+    .orient("left");
+
+  var chart = d3.select(".hours-posted-chart")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  var legend = chart.append("g")
+              .attr("class", "legend")
+              .attr("transform", "translate(" + (width - 40) + ",0)");
+
+  for (var i=0; i < wordList.length; i++) {
+    legend.append("text")
+        .text(wordList[i])
+        .attr("fill", colorScale(wordList[i]))
+        .attr("y", (i+1) * 25);
+  }
+
+  yScale.domain([0, d3.max(timeDataFlattened, function(d) { return d[2]; })]);
+
+  chart.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  chart.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+  var plot = chart.selectAll(".plot-point")
+            .data(timeDataFlattened)
+            .enter()
+            .append("circle")
+            .attr("class", "plot-point")
+            .attr("cx", function(d) { return xScale(d[1]); })
+            .attr("cy", function(d) { return yScale(d[2]); })
+            .attr("r", "5")
+            .attr("fill", function(d) { return colorScale(d[0]); });
+}
 
 function drawAvgScoreBarChart(jsonWords) {
   var margin = {top: 20, right: 30, bottom: 30, left: 40},

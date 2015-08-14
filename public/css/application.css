@@ -1,6 +1,6 @@
 
 body {
-  background:  #00E5FF;
+  background:  #8CB2D6;
   margin: 0;
   padding: 0;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -126,8 +126,8 @@ form {
   shape-rendering: crispEdges;
 }
 
-.x.axis path {
-  display: none;
+.legend text {
+  font-weight: bold;
 }
 
 .bar2 {
