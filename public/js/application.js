@@ -197,7 +197,7 @@ function drawAvgScoreBarChart(jsonWords) {
 
 
 function drawFrequencyBarChart(jsonWords) {
-  var margin = {top: 20, right: 30, bottom: 30, left: 40},
+  var margin = {top: 20, right: 30, bottom: 30, left: 50},
       width = GRAPH_WIDTH - margin.left - margin.right,
       height = GRAPH_HEIGHT - margin.top - margin.bottom;
 
@@ -217,7 +217,8 @@ function drawFrequencyBarChart(jsonWords) {
 
   var yAxis = d3.svg.axis()
     .scale(y)
-    .orient("left");
+    .orient("left")
+    .tickFormat(d3.format("d"));
 
   var chart = d3.select(".frequency-chart")
     .attr("width", width + margin.left + margin.right)
