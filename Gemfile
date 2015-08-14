@@ -19,6 +19,4 @@ gem 'faker'
 
 gem 'shotgun'
 
-group :test do
-  gem 'rspec'
-end
+gem 'rspec'
