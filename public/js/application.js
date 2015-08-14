@@ -1,5 +1,6 @@
 
 $(document).ready(function() {
+  $(".loader").hide();
   $(".arrow").velocity({
   translateY: "6px"
 }, {
@@ -9,7 +10,8 @@ $(document).ready(function() {
 
   $("form").on("submit", function(e){
     e.preventDefault();
-
+    $(".arrow").hide();
+    $(".loader").show();
 
     var request = $.ajax ({
       method: "POST",
@@ -18,7 +20,7 @@ $(document).ready(function() {
     });
     request.done(function(response){
       console.log(response);
-      $(".arrow").hide();
+      $(".loader").hide();
       $("h4").toggle();
       $("#hide").toggle();
       $(".chart").show();
