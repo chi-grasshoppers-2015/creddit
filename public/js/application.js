@@ -11,6 +11,7 @@ $(document).ready(function() {
   $("form").on("submit", function(e){
     e.preventDefault();
     $(".arrow").hide();
+    clearSearchResults();
     $(".loader").show();
 
     var request = $.ajax ({
@@ -21,9 +22,10 @@ $(document).ready(function() {
     request.done(function(response){
       console.log(response);
       $(".loader").hide();
-      $("h4").toggle();
-      $("#hide").toggle();
+      $("h4").show();
+      $("#hide").show();
       $(".chart").show();
+      $("form").trigger('reset');
       drawFrequencyBarChart(response);
       drawAvgScoreBarChart(response);
       drawHoursPostedPlot(response);
@@ -38,6 +40,11 @@ $(document).ready(function() {
 
   // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
 });
+
+function clearSearchResults() {
+  $('svg.chart').children().remove();
+  $('.chart').hide();
+}
 
 function drawHoursPostedPlot(jsonWords) {
 
