@@ -36,6 +36,7 @@ $(document).ready(function() {
       drawFrequencyBarChart(response);
       drawAvgScoreBarChart(response);
       drawHoursPostedPlot(response);
+      drawScoreDistributionPlot(response);
     });
 
   })
@@ -48,6 +49,86 @@ function clearSearchResults() {
 
 GRAPH_HEIGHT = 300
 GRAPH_WIDTH = 750
+
+function drawScoreDistributionPlot(jsonWords) {
+
+  var wordList = jsonWords.map(function(wordObj) {
+    return wordObj.word;
+  });
+
+  var scoreData = jsonWords.map(function(wordObj) {
+    return wordObj.scores_distribution;
+  });
+
+  var scoreDataFlattened = scoreData.reduce(function(a, b) {
+    return a.concat(b);
+  });
+
+  var margin = {top: 20, right: 30, bottom: 30, left: 50},
+      width = GRAPH_WIDTH - margin.left - margin.right,
+      height = GRAPH_HEIGHT - margin.top - margin.bottom;
+
+  var xScale = d3.scale.linear()
+      .range([10, width]);
+
+
+  var yScale = d3.scale.linear()
+      .range([(height - 5), 0]);
+
+  var colorScale = d3.scale.category20()
+      .domain(wordList);
+
+  var chart = d3.select(".score-distribution-chart")
+      .attr("width", width)
+      .attr("height", height);
+
+  var xAxis = d3.svg.axis()
+    .scale(xScale)
+    .orient("bottom");
+
+  var yAxis = d3.svg.axis()
+    .scale(yScale)
+    .orient("left");
+
+  var chart = d3.select(".score-distribution-chart")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  var legend = chart.append("g")
+              .attr("class", "legend")
+              .attr("transform", "translate(" + (width - 80) + ",0)");
+
+  for (var i=0; i < wordList.length; i++) {
+    legend.append("text")
+        .text(wordList[i])
+        .attr("fill", colorScale(wordList[i]))
+        .attr("y", (i+1) * 25);
+  }
+
+  xScale.domain([5, d3.max(scoreDataFlattened, function(d) { return d[1] })])
+  yScale.domain([0, d3.max(scoreDataFlattened, function(d) { return d[2]; })]);
+
+  chart.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+
+  chart.append("g")
+      .attr("class", "y axis")
+      .call(yAxis);
+
+  var plot = chart.selectAll(".plot-point")
+            .data(scoreDataFlattened)
+            .enter()
+            .append("circle")
+            .attr("class", "plot-point")
+            .attr("cx", function(d) { return xScale(d[1]); })
+            .attr("cy", function(d) { return yScale(d[2]); })
+            .attr("r", "5")
+            .attr("fill", function(d) { return colorScale(d[0]); });
+}
 
 function drawHoursPostedPlot(jsonWords) {
 
@@ -62,8 +143,6 @@ function drawHoursPostedPlot(jsonWords) {
   var timeDataFlattened = timeData.reduce(function(a, b) {
     return a.concat(b);
   });
-
-  console.log(timeDataFlattened);
 
   var margin = {top: 20, right: 30, bottom: 30, left: 50},
       width = GRAPH_WIDTH - margin.left - margin.right,
