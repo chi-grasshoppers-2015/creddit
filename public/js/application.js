@@ -26,10 +26,27 @@ $(document).ready(function() {
       $("h4").show();
       $(".tabs").on('click','a', function(event){
         event.preventDefault();
+        $('svg.chart').children().remove();
         $(".tab").hide();
         $(".chart div").hide();
         var a_href = $(event.target).attr('href');
         $(a_href).show();
+        if (a_href === ".total-frequency") {
+          $('.frequency-chart').show();
+          drawFrequencyBarChart(response);
+        }
+        else if (a_href === ".average-score") {
+          $('.avg-score-chart').show();
+          drawAvgScoreBarChart(response);
+        }
+        else if (a_href === ".hours-posted") {
+          $('.hours-posted-chart').show();
+          drawHoursPostedPlot(response);
+        }
+        else {
+          $('.score-distribution-chart').show();
+          drawScoreDistributionPlot(response);
+        }
         $('li').removeClass("active");
         $(event.target).parent().addClass("active");
       });
@@ -122,13 +139,20 @@ function drawScoreDistributionPlot(jsonWords) {
 
   var plot = chart.selectAll(".plot-point")
             .data(scoreDataFlattened)
-            .enter()
-            .append("circle")
-            .attr("class", "plot-point")
-            .attr("cx", function(d) { return xScale(d[1]); })
-            .attr("cy", function(d) { return yScale(d[2]); })
-            .attr("r", "5")
-            .attr("fill", function(d) { return colorScale(d[0]); });
+            .enter();
+
+  var points = plot.append("circle")
+                  .attr("class", "plot-point")
+                  .attr("r", "5")
+                  .attr("cx", 0)
+                  .attr("cy", 0)
+                  .attr("fill", function(d) { return colorScale(d[0]); });
+
+  points.transition()
+        .duration(500)
+        .ease("elastic-in")
+        .attr("cx", function(d) { return xScale(d[1]); })
+        .attr("cy", function(d) { return yScale(d[2]); });
 }
 
 function drawHoursPostedPlot(jsonWords) {
@@ -203,13 +227,21 @@ function drawHoursPostedPlot(jsonWords) {
 
   var plot = chart.selectAll(".plot-point")
             .data(timeDataFlattened)
-            .enter()
-            .append("circle")
-            .attr("class", "plot-point")
-            .attr("cx", function(d) { return xScale(d[1]); })
-            .attr("cy", function(d) { return yScale(d[2]); })
-            .attr("r", "5")
-            .attr("fill", function(d) { return colorScale(d[0]); });
+            .enter();
+
+  var points = plot.append("circle")
+                  .attr("class", "plot-point")
+                  .attr("r", "5")
+                  .attr("cx", 0)
+                  .attr("cy", 0)
+                  .attr("fill", function(d) { return colorScale(d[0]); });
+
+  points.transition()
+        .duration(500)
+        .ease("elastic-in")
+        .attr("cx", function(d) { return xScale(d[1]); })
+        .attr("cy", function(d) { return yScale(d[2]); });
+
 }
 
 function drawAvgScoreBarChart(jsonWords) {
@@ -261,18 +293,38 @@ function drawAvgScoreBarChart(jsonWords) {
             .append("g")
             .attr("class", "bar-group")
 
-  bar.append("rect")
+  var bars = bar.append("rect")
      .attr("class", "bar")
      .attr("x", function(d) { return x(d.word); })
-     .attr("y", function(d) { return y(d.avgpoints); })
-     .attr("height", function(d) { return height - y(d.avgpoints); })
+     .attr("y", height)
      .attr("width", x.rangeBand())
+     .attr("height", 0)
+      .attr("transform", function(d) {
+        return "rotate(180," + (x(d.word) + (x.rangeBand() / 2)) + "," + height + ")";
+      });
 
-  bar.append("text")
-     .attr("x", function(d) { return x(d.word) + (barWidth / 2) - (margin.right / 2); })
-     .attr("y", function(d) { return y(d.avgpoints) + 5; })
-     .attr("dy", ".75em")
+  bars.transition()
+      .duration(500)
+      .attr("height", function(d) { return height - y(d.avgpoints); });
+
+
+  // bar.append("text")
+  //    .attr("x", function(d) { return x(d.word) + (barWidth / 2) - (margin.right / 2); })
+  //    .attr("y", function(d) { return y(d.avgpoints) + 5; })
+  //    .attr("dy", ".75em")
+  //    .text(function(d) { return d.avgpoints; });
+
+
+  var labels = bar.append("text")
+     .attr("x", function(d) { return x(d.word) + (x.rangeBand() / 2) - 5; })
+     .attr("y", height)
+     .attr("dy", "-0.2em")
+     .attr("fill", "black")
      .text(function(d) { return d.avgpoints; });
+
+  labels.transition()
+        .duration(500)
+        .attr("y", function(d) { return y(d.avgpoints) - 5; });
 }
 
 
@@ -326,17 +378,28 @@ function drawFrequencyBarChart(jsonWords) {
             .append("g")
             .attr("class", "bar-group")
 
-  bar.append("rect")
+  var bars = bar.append("rect")
       .attr("class", "bar2")
       .attr("x", function(d) { return x(d.word); })
-      .attr("y", function(d) { return y(d.frequency); })
+      .attr("y", height)
       .attr("width", x.rangeBand())
+      .attr("height", 0)
+      .attr("transform", function(d) {
+        return "rotate(180," + (x(d.word) + (x.rangeBand() / 2)) + "," + height + ")";
+      });
+
+  bars.transition()
+      .duration(500)
       .attr("height", function(d) { return height - y(d.frequency); });
 
-  bar.append("text")
-     .attr("x", function(d) { return x(d.word) + (barWidth / 2) - (margin.right / 2); })
-     .attr("y", function(d) { return y(d.frequency) - 5; })
-     .attr("dy", ".75em")
+  var labels = bar.append("text")
+     .attr("x", function(d) { return x(d.word) + (x.rangeBand() / 2) - 5; })
+     .attr("y", height)
+     .attr("dy", "-0.2em")
      .attr("fill", "black")
      .text(function(d) { return d.frequency; });
+
+  labels.transition()
+        .duration(500)
+        .attr("y", function(d) { return y(d.frequency) - 5; });
 }
