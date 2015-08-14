@@ -261,8 +261,8 @@ form {
     line-height: 30px;
 }
 .tabs li a {
-    color: #666;
-    font-family: Helvetica, Arial, sans-serif;
+    color: darkgrey;
+    font-family: sans-serif;
     text-decoration: none;
 }
 
@@ -285,7 +285,7 @@ form {
 }
 
 .tabs li.active a {
-    color: black;
+    color: darkgrey;
     text-decoration: none;
     border-bottom: none;
 }
