@@ -26,10 +26,27 @@ $(document).ready(function() {
       $("h4").show();
       $(".tabs").on('click','a', function(event){
         event.preventDefault();
+        $('svg.chart').children().remove();
         $(".tab").hide();
         $(".chart div").hide();
         var a_href = $(event.target).attr('href');
         $(a_href).show();
+        if (a_href === ".total-frequency") {
+          $('.frequency-chart').show();
+          drawFrequencyBarChart(response);
+        }
+        else if (a_href === ".average-score") {
+          $('.avg-score-chart').show();
+          drawAvgScoreBarChart(response);
+        }
+        else if (a_href === ".hours-posted") {
+          $('.hours-posted-chart').show();
+          drawHoursPostedPlot(response);
+        }
+        else {
+          $('.score-distribution-chart').show();
+          drawScoreDistributionPlot(response);
+        }
         $('li').removeClass("active");
         $(event.target).parent().addClass("active");
       });
@@ -261,12 +278,20 @@ function drawAvgScoreBarChart(jsonWords) {
             .append("g")
             .attr("class", "bar-group")
 
-  bar.append("rect")
+  var bars = bar.append("rect")
      .attr("class", "bar")
      .attr("x", function(d) { return x(d.word); })
-     .attr("y", function(d) { return y(d.avgpoints); })
-     .attr("height", function(d) { return height - y(d.avgpoints); })
+     .attr("y", height)
      .attr("width", x.rangeBand())
+     .attr("height", 0)
+      .attr("transform", function(d) {
+        return "rotate(180," + (x(d.word) + (x.rangeBand() / 2)) + "," + height + ")";
+      });
+
+  bars.transition()
+      .duration(500)
+      .attr("height", function(d) { return height - y(d.avgpoints); });
+
 
   bar.append("text")
      .attr("x", function(d) { return x(d.word) + (barWidth / 2) - (margin.right / 2); })
@@ -326,11 +351,18 @@ function drawFrequencyBarChart(jsonWords) {
             .append("g")
             .attr("class", "bar-group")
 
-  bar.append("rect")
+  var bars = bar.append("rect")
       .attr("class", "bar2")
       .attr("x", function(d) { return x(d.word); })
-      .attr("y", function(d) { return y(d.frequency); })
+      .attr("y", height)
       .attr("width", x.rangeBand())
+      .attr("height", 0)
+      .attr("transform", function(d) {
+        return "rotate(180," + (x(d.word) + (x.rangeBand() / 2)) + "," + height + ")";
+      });
+
+  bars.transition()
+      .duration(500)
       .attr("height", function(d) { return height - y(d.frequency); });
 
   bar.append("text")
