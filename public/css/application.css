@@ -114,8 +114,12 @@ form {
   font: 12px sans-serif;
 }
 
+.y.axis text {
+  font: 12px sans-serif;
+}
+
 .axis text {
-  font: 20px sans-serif;
+  font: 16px sans-serif;
   fill: darkgrey;
 }
 
@@ -158,7 +162,7 @@ form {
   opacity: .7;
 }
 
-#hide {
+.divider {
   display: none;
 }
 
@@ -175,7 +179,7 @@ form {
 /* CSS Spinner from http://projects.lukehaas.me/css-loaders/ */
 .loader {
   font-size: 20px;
-  margin: 100px auto;
+  margin: 175px auto 50px;
   width: 1em;
   height: 1em;
   border-radius: 50%;

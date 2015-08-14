@@ -2,12 +2,7 @@
 $(document).ready(function() {
   $(".tabs").hide();
   $(".loader").hide();
-  $(".arrow").velocity({
-  translateY: "6px"
-}, {
-  loop: true
-}).velocity("reverse");
-
+  $(".arrow").velocity({ translateY: "6px" }, { loop: true }).velocity("reverse");
 
   $("form").on("submit", function(e){
     e.preventDefault();
@@ -28,7 +23,6 @@ $(document).ready(function() {
       $(".hours-posted").hide()
       $(".loader").hide();
       $("h4").show();
-
       $(".tabs").on('click','a', function(event){
         event.preventDefault();
         $(".tab").hide();
@@ -37,28 +31,23 @@ $(document).ready(function() {
         $(a_href).show();
         $('li').removeClass("active");
         $(event.target).parent().addClass("active");
-    });
-
+      });
       $("form").trigger('reset');
       drawFrequencyBarChart(response);
       drawAvgScoreBarChart(response);
       drawHoursPostedPlot(response);
-      // Iterate through the json object that has been processed in ruby already, for each AR comment object
-      // response.each()
     });
 
   })
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
-
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
 });
 
 function clearSearchResults() {
   $('svg.chart').children().remove();
   $('.chart').hide();
 }
+
+GRAPH_HEIGHT = 300
+GRAPH_WIDTH = 750
 
 function drawHoursPostedPlot(jsonWords) {
 
@@ -76,9 +65,9 @@ function drawHoursPostedPlot(jsonWords) {
 
   console.log(timeDataFlattened);
 
-  var margin = {top: 20, right: 30, bottom: 30, left: 40},
-      width = 700 - margin.left - margin.right,
-      height = 300 - margin.top - margin.bottom;
+  var margin = {top: 20, right: 30, bottom: 30, left: 50},
+      width = GRAPH_WIDTH - margin.left - margin.right,
+      height = GRAPH_HEIGHT - margin.top - margin.bottom;
 
   var xScale = d3.scale.ordinal()
       .domain([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
@@ -112,7 +101,7 @@ function drawHoursPostedPlot(jsonWords) {
 
   var legend = chart.append("g")
               .attr("class", "legend")
-              .attr("transform", "translate(" + (width - 40) + ",0)");
+              .attr("transform", "translate(" + (width - 80) + ",0)");
 
   for (var i=0; i < wordList.length; i++) {
     legend.append("text")
@@ -144,9 +133,9 @@ function drawHoursPostedPlot(jsonWords) {
 }
 
 function drawAvgScoreBarChart(jsonWords) {
-  var margin = {top: 20, right: 30, bottom: 30, left: 40},
-      width = 700 - margin.left - margin.right,
-      height = 300 - margin.top - margin.bottom;
+  var margin = {top: 20, right: 30, bottom: 30, left: 50},
+      width = GRAPH_WIDTH - margin.left - margin.right,
+      height = GRAPH_HEIGHT - margin.top - margin.bottom;
 
   var x = d3.scale.ordinal()
       .rangeRoundBands([0, width], .1);
@@ -208,9 +197,9 @@ function drawAvgScoreBarChart(jsonWords) {
 
 
 function drawFrequencyBarChart(jsonWords) {
-  var margin = {top: 20, right: 30, bottom: 30, left: 40},
-      width = 700 - margin.left - margin.right,
-      height = 300 - margin.top - margin.bottom;
+  var margin = {top: 20, right: 30, bottom: 30, left: 50},
+      width = GRAPH_WIDTH - margin.left - margin.right,
+      height = GRAPH_HEIGHT - margin.top - margin.bottom;
 
   var x = d3.scale.ordinal()
       .rangeRoundBands([0, width], .1);
@@ -228,7 +217,8 @@ function drawFrequencyBarChart(jsonWords) {
 
   var yAxis = d3.svg.axis()
     .scale(y)
-    .orient("left");
+    .orient("left")
+    .tickFormat(d3.format("d"));
 
   var chart = d3.select(".frequency-chart")
     .attr("width", width + margin.left + margin.right)
