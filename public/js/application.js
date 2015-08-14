@@ -327,15 +327,16 @@ function drawFrequencyBarChart(jsonWords) {
             .attr("class", "bar-group")
 
   bar.append("rect")
-     .attr("class", "bar2")
-     .attr("x", function(d) { return x(d.word); })
-     .attr("y", function(d) { return y(d.frequency); })
-     .attr("height", function(d) { return height - y(d.frequency); })
-     .attr("width", x.rangeBand())
+      .attr("class", "bar2")
+      .attr("x", function(d) { return x(d.word); })
+      .attr("y", function(d) { return y(d.frequency); })
+      .attr("width", x.rangeBand())
+      .attr("height", function(d) { return height - y(d.frequency); });
 
   bar.append("text")
      .attr("x", function(d) { return x(d.word) + (barWidth / 2) - (margin.right / 2); })
-     .attr("y", function(d) { return y(d.frequency) + 5; })
+     .attr("y", function(d) { return y(d.frequency) - 5; })
      .attr("dy", ".75em")
+     .attr("fill", "black")
      .text(function(d) { return d.frequency; });
 }

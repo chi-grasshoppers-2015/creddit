@@ -108,6 +108,10 @@ form {
   font: 12px sans-serif;
 }
 
+.frequency-chart .bar-group text {
+
+}
+
 .y.axis text {
   font: 12px sans-serif;
 }
@@ -317,5 +321,3 @@ a  {
 .pipe {
   color: grey;
 }
-
-
