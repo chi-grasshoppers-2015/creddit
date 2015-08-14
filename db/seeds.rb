@@ -5,7 +5,7 @@ require 'uri'
 all_uri = URI.parse("http://www.reddit.com/r/all.json")
 
 comments_json = []
-20.times do
+10.times do
   response = Net::HTTP::get_response(all_uri)
   posts = JSON.parse(response.body)
   post_ids = posts["data"]["children"].map { |p| p["data"]["id"] }
