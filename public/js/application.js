@@ -96,10 +96,6 @@ function drawScoreDistributionPlot(jsonWords) {
   var colorScale = d3.scale.category20()
       .domain(wordList);
 
-  var chart = d3.select(".score-distribution-chart")
-      .attr("width", width)
-      .attr("height", height);
-
   var xAxis = d3.svg.axis()
     .scale(xScale)
     .orient("bottom");
@@ -109,24 +105,24 @@ function drawScoreDistributionPlot(jsonWords) {
     .orient("left");
 
   var chart = d3.select(".score-distribution-chart")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   var legend = chart.append("g")
-              .attr("class", "legend")
-              .attr("transform", "translate(" + (width - 80) + ",0)");
+                .attr("class", "legend")
+                .attr("transform", "translate(" + (width - 80) + ",0)");
 
   for (var i=0; i < wordList.length; i++) {
     legend.append("text")
-        .text(wordList[i])
-        .attr("fill", colorScale(wordList[i]))
-        .attr("y", (i+1) * 25);
+          .text(wordList[i])
+          .attr("fill", colorScale(wordList[i]))
+          .attr("y", (i+1) * 25);
   }
 
   xScale.domain([5, d3.max(scoreDataFlattened, function(d) { return d[1] })])
-  yScale.domain([0, d3.max(scoreDataFlattened, function(d) { return d[2]; })]);
+  yScale.domain([1, d3.max(scoreDataFlattened, function(d) { return d[2]; })]);
 
   chart.append("g")
       .attr("class", "x axis")
@@ -138,8 +134,8 @@ function drawScoreDistributionPlot(jsonWords) {
       .call(yAxis);
 
   var plot = chart.selectAll(".plot-point")
-            .data(scoreDataFlattened)
-            .enter();
+                  .data(scoreDataFlattened)
+                  .enter();
 
   var points = plot.append("circle")
                   .attr("class", "plot-point")
